@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sevgilim Ceylin 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      color: white;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    h2 { color: #e84393; }
+
+    .counter {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    .romantik-yazi {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 1.2rem;
+      color: #e84393;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      20% { transform: translateX(-10px); }
+      40% { transform: translateX(10px); }
+      60% { transform: translateX(-10px); }
+      80% { transform: translateX(10px); }
+      100% { transform: translateX(0); }
+    }
+
+    .shake { animation: shake 0.4s; }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #e84393;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    .gizli-mesaj {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 16px;
+      background: #ffe6ee;
+      color: #e84393;
+      font-size: 1.15rem;
+      opacity: 0;
+      transform: scale(0.8) translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gizli-mesaj.acik {
+      display: block;
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .kalp {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: kalpUcus 3s linear forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes kalpUcus {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+    }
+
+    .galeri {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .galeri-cerceve {
+      width: 100%;
+      max-width: 300px;
+      height: 380px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 15px;
+    }
+
+    .galeri-resim {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .galeri-resim.aktif {
+      opacity: 1;
+      transform: translateX(0);
+      z-index: 1;
+    }
+
+    .galeri-btn {
+      background: #e84393;
+      color: white;
+      border: none;
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>💖 Sevgilim Ceylin 💖</h1>
+  <p>Bu site sana olan sevgimle hazırlandı :> </p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Tatlışım, </h2>
+    <p>Hayatıma girdiğin günden beri her şey daha güzel. Daha canlı. İyi ki varsınnn</p>
+  </div>
+
+  <div class="card">
+    <h2>Ne Kadar Zamandır Biz?</h2>
+    <p class="counter" id="counter">Hesaplanıyor...</p>
+    <p id="romantikMetin" class="romantik-yazi"></p>
+  </div>
+
+  <div class="card">
+    <h2>Anılarımızzzz</h2>
+
+    <div style="text-align:center; margin-bottom:10px;">
+      <button onclick="muzikToggle()" id="muzikBtn">🎶 Müziği Başlat</button>
+    </div>
+
+    <audio id="galeriMuzik" loop>
+      <source src="Müzük.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="galeri">
+      <button class="galeri-btn" onclick="oncekiResim()">‹</button>
+      <div class="galeri-cerceve">
+        <img src="resim1.jpg" class="galeri-resim aktif" alt="resim">
+        <img src="resim2.jpg" class="galeri-resim" alt="resim">
+        <img src="resim3.jpg" class="galeri-resim" alt="resim">
+	<img src="resim4.jpg" class="galeri-resim" alt="resim">
+        <img src="resim5.jpg" class="galeri-resim" alt="resim">
+	<img src="resim6.jpg" class="galeri-resim" alt="resim">
+        <img src="resim7.png" class="galeri-resim" alt="resim">
+       
+
+      </div>
+      <button class="galeri-btn" onclick="sonrakiResim()">›</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Sürpriz Mesaj 🔒</h2>
+    <p>Şifreyi yaz:</p>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <input type="password" id="sifreInput" placeholder="Şifre">
+      <button type="button" onclick="sifreGosterGizle()">👁️</button>
+    </div>
+    <br>
+    <button onclick="mesajiAc()">Mesajı Aç</button>
+
+    <div id="gizliMesaj" class="gizli-mesaj">
+      Ceylin… 💖<br><br>
+      Bu satırları okuduğun anda bil ki kalbimin en güzel yerindesin <3
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Sevgililer Günümüz Kutlu Olsun 💞</p>
+</footer>
+
+<script>
+  const tanismaTarihi = new Date(2025, 8, 5, 19, 40, 0);
+
+  function sayaciHesapla() {
+    const simdi = new Date();
+    let farkMs = simdi - tanismaTarihi;
+
+    if (farkMs < 0) {
+      document.getElementById('counter').innerHTML = "Henüz tanışmadık 💫";
+      return;
+    }
+
+    let saniyeToplam = Math.floor(farkMs / 1000);
+
+    const saniye = saniyeToplam % 60;
+    saniyeToplam = Math.floor(saniyeToplam / 60);
+
+    const dakika = saniyeToplam % 60;
+    saniyeToplam = Math.floor(saniyeToplam / 60);
+
+    const saat = saniyeToplam % 24;
+    saniyeToplam = Math.floor(saniyeToplam / 24);
+
+    const gunToplam = saniyeToplam;
+
+    const yil = Math.floor(gunToplam / 365);
+    const ay = Math.floor((gunToplam % 365) / 30);
+    const hafta = Math.floor(((gunToplam % 365) % 30) / 7);
+    const gun = ((gunToplam % 365) % 30) % 7;
+
+    document.getElementById('counter').innerHTML =
+      `${yil} yıl, ${ay} ay, ${hafta} hafta, ${gun} gün<br>` +
+      `${saat} saat, ${dakika} dakika, ${saniye} saniyedir birlikteyiz 💖`;
+  }
+
+  setInterval(sayaciHesapla, 1000);
+  sayaciHesapla();
+
+  function mesajiAc() {
+    const sifreInput = document.getElementById("sifreInput");
+    const mesaj = document.getElementById("gizliMesaj");
+
+    if (sifreInput.value === "CEYLIN") {
+      mesaj.style.display = "block";
+      setTimeout(() => {
+        mesaj.classList.add("acik");
+        kalpEfekti();
+      }, 50);
+    } else {
+      sifreInput.classList.add("shake");
+      setTimeout(() => sifreInput.classList.remove("shake"), 400);
+    }
+  }
+
+  function sifreGosterGizle() {
+    const input = document.getElementById("sifreInput");
+    input.type = input.type === "password" ? "text" : "password";
+  }
+
+  const romantikCumleler = [
+    "Her geçen saniye sana daha çok aşık oluyorum 💫",
+    "Bu süre sadece bir sayaç değil, bizim hikâyemiz ✨",
+    "Gülüşün, en sevdiğim manzara 😍",
+    "Seni Çok Seviyorum Seni Hiç Bırakmayacağım 💕",
+    "Bu kalp, sadece sana ait ❤️",
+    "Zaman geçiyor ama sevgim hep artıyor ⏳💞"
+  ];
+
+  let cumleIndex = 0;
+  const romantikAlan = document.getElementById("romantikMetin");
+
+  function romantikMetniDegistir() {
+    romantikAlan.style.opacity = 0;
+    setTimeout(() => {
+      romantikAlan.textContent = romantikCumleler[cumleIndex];
+      romantikAlan.style.opacity = 1;
+      cumleIndex = (cumleIndex + 1) % romantikCumleler.length;
+    }, 500);
+  }
+
+  romantikMetniDegistir();
+  setInterval(romantikMetniDegistir, 4000);
+
+  function kalpEfekti() {
+    const mesaj = document.getElementById("gizliMesaj");
+
+    for (let i = 0; i < 15; i++) {
+      const kalp = document.createElement("span");
+      kalp.className = "kalp";
+      kalp.textContent = Math.random() > 0.5 ? "💖" : "💜";
+      kalp.style.left = Math.random() * 100 + "%";
+      kalp.style.animationDelay = Math.random() * 0.5 + "s";
+      kalp.style.fontSize = 16 + Math.random() * 20 + "px";
+      mesaj.appendChild(kalp);
+
+      setTimeout(() => {
+        kalp.remove();
+      }, 3000);
+    }
+  }
+
+  const resimler = document.querySelectorAll('.galeri-resim');
+  let aktifResim = 0;
+
+  function gosterResim(index) {
+    resimler.forEach((resim, i) => {
+      resim.classList.toggle('aktif', i === index);
+    });
+  }
+
+  function sonrakiResim() {
+    aktifResim = (aktifResim + 1) % resimler.length;
+    gosterResim(aktifResim);
+  }
+
+  function oncekiResim() {
+    aktifResim = (aktifResim - 1 + resimler.length) % resimler.length;
+    gosterResim(aktifResim);
+  }
+
+  const muzik = document.getElementById("galeriMuzik");
+  const muzikBtn = document.getElementById("muzikBtn");
+  let muzikCalıyor = false;
+
+  function muzikToggle() {
+    if (!muzikCalıyor) {
+      muzik.play();
+      muzikCalıyor = true;
+      muzikBtn.textContent = "⏸️ Müziği Durdur";
+    } else {
+      muzik.pause();
+      muzikCalıyor = false;
+      muzikBtn.textContent = "🎶 Müziği Başlat";
+    }
+  }
+
+  // Basit testler (konsolda görünür)
+  document.addEventListener('DOMContentLoaded', () => {
+    console.assert(typeof mesajiAc === 'function', 'mesajiAc fonksiyonu tanımlı olmalı');
+    console.assert(typeof sifreGosterGizle === 'function', 'sifreGosterGizle fonksiyonu tanımlı olmalı');
+    console.assert(resimler.length >= 1, 'En az bir galeri resmi olmalı');
+  });
+</script>
+
+</body>
+</html>
